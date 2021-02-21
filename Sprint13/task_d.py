@@ -8,5 +8,5 @@ def solution(node, elem):
         else:
             node = node.next_item
             i += 1
-    if node == None:
+    if node is None:
         return -1
