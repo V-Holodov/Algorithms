@@ -1,31 +1,38 @@
-# ID 48669331
+# ID 48699680
+
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, value):
+        self.items.append(int(value))
+
+    def pop(self):
+        return self.items.pop()
 
 
 def comp(a, b, sign):
-    """Выполнение арифметической операции в зависимости от знака операции."""
-    if sign == '+':
-        result = a + b
-    elif sign == '-':
-        result = a - b
-    elif sign == '/':
-        result = a // b
-    elif sign == '*':
-        result = a * b
-    return result
+    operations = {
+        '+': lambda a, b: a + b,
+        '-': lambda a, b: a - b,
+        '*': lambda a, b: a * b,
+        '/': lambda a, b: a // b
+        }
+    return operations[sign](a, b)
 
 
 def polish_calc(order):
     """Калькулятор с обратной польской нотацией."""
-    stack = []
+    stack = Stack()
     signs = ['+', '-', '*', '/']
     for value in order:
         if value in signs:
-            b = int(stack.pop())
-            a = int(stack.pop())
+            b = stack.pop()
+            a = stack.pop()
             result = comp(a, b, value)
-            stack.append(result)
+            stack.push(result)
         else:
-            stack.append(value)
+            stack.push(value)
     return stack.pop()
 
 

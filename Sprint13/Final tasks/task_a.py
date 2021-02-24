@@ -1,4 +1,4 @@
-# ID 48665268
+# ID 48692761
 
 
 class MyDeq:
@@ -22,10 +22,7 @@ class MyDeq:
         if self.size == self.max_size:
             print('error')
         else:
-            if self.head == 0:
-                self.head = self.max_size - 1
-            else:
-                self.head -= 1
+            self.head = (self.head - 1) % self.max_size
             self.deq[self.head] = value
             self.size += 1
 
@@ -41,14 +38,9 @@ class MyDeq:
     def pop_back(self):
         if self.size == 0:
             return 'error'
-        if self.tail == 0:
-            x = self.deq[self.max_size - 1]
-            self.deq[self.max_size - 1] = None
-            self.tail = self.max_size - 1
-        else:
-            x = self.deq[self.tail - 1]
-            self.deq[self.tail - 1] = None
-            self.tail -= 1
+        x = self.deq[(self.tail - 1) % self.max_size]
+        self.deq[(self.tail - 1) % self.max_size] = None
+        self.tail = (self.tail - 1) % self.max_size
         self.size -= 1
         return x
 
@@ -70,5 +62,5 @@ if __name__ == '__main__':
     n = int(input())
     max_size = int(input())
     deq = MyDeq(max_size)
-    for i in range(n):
+    for _ in range(n):
         get_metod(deq, input())
