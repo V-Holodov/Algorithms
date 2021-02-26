@@ -1,17 +1,17 @@
 # ID 48805803
 
 class Stack:
-    def __init__(self):
+    def __init__(self) -> None:
         self.items = []
 
-    def push(self, value):
+    def push(self, value: int) -> None:
         self.items.append(value)
 
-    def pop(self):
+    def pop(self) -> int:
         return self.items.pop()
 
 
-def comp(a, b, sign):
+def comp(a: int, b: int, sign: str) -> int:
     operations = {
         '+': lambda a, b: a + b,
         '-': lambda a, b: a - b,
@@ -21,7 +21,7 @@ def comp(a, b, sign):
     return operations[sign](a, b)
 
 
-def polish_calc(order):
+def polish_calc(order: list) -> int:
     """Калькулятор с обратной польской нотацией."""
     stack = Stack()
     signs = ('+', '-', '*', '/')
@@ -36,7 +36,7 @@ def polish_calc(order):
     return stack.pop()
 
 
-def main():
+def main() -> None:
     order = input().split()
     print(polish_calc(order))
 
