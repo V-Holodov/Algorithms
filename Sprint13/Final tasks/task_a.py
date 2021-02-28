@@ -1,5 +1,5 @@
 # ID 48804612
-import typing
+from typing import Union
 
 
 class MyDeq:
@@ -16,14 +16,14 @@ class MyDeq:
     def __len__(self) -> int:
         return self.size
 
-    def push_back(self, value: str) -> typing.Union[str, None]:
+    def push_back(self, value: str) -> Union[str, None]:
         if self.size == self.max_size:
             return 'error'
         self.deq[self.tail] = value
         self.tail = (self.tail + 1) % self.max_size
         self.size += 1
 
-    def push_front(self, value: str) -> typing.Union[str, None]:
+    def push_front(self, value: str) -> Union[str, None]:
         if self.size == self.max_size:
             return 'error'
         self.head = (self.head - 1) % self.max_size
@@ -47,7 +47,7 @@ class MyDeq:
         return x
 
 
-def get_metod(deq: MyDeq, command: str) -> typing.Union[str, None]:
+def get_metod(deq: MyDeq, command: str) -> Union[str, None]:
     """Вызов метода на основе поступившей команды."""
     key = command.split()
     if key[0] == 'push_back':

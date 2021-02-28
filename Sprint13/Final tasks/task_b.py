@@ -21,10 +21,10 @@ def comp(a: int, b: int, sign: str) -> int:
     return operations[sign](a, b)
 
 
-def polish_calc(order: list) -> int:
+def polish_calc(order: list[str]) -> int:
     """Калькулятор с обратной польской нотацией."""
     stack = Stack()
-    signs = ('+', '-', '*', '/')
+    signs = {'+', '-', '*', '/'}
     for value in order:
         if value in signs:
             b = stack.pop()
