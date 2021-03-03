@@ -1,6 +1,6 @@
 def comb(seq, item, comand, n, keybord, cursor):
     if n == 0:
-        seq = seq + item + ' '
+        seq.append(item)
     else:
         for i in keybord[comand[cursor]]:
             comb(seq, item + i, comand, n - 1, keybord, cursor + 1)
@@ -19,7 +19,8 @@ def main():
         '9': 'wxyz'
         }
     comand = input()
-    print(comb('', '', comand, len(comand), keybord, 0))
+    result = comb([], '', comand, len(comand), keybord, 0)
+    print(' '.join(result))
 
 
 if __name__ == '__main__':
