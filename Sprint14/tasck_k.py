@@ -18,18 +18,24 @@ def merge(arr: list, left: int, mid: int, right: int) -> list:
         result[k] = arr[r]
         r += 1
         k += 1
-    arr = result
-    return arr
-
-
-def merge_sort(arr: list, left: int, right: int) -> None:
-    if right - left == 1:
-        return merge(arr, left, (right - left) // 2 + left, right)
-    merge_sort(arr, left, (right - left) // 2 + left)
-    merge_sort(arr, ((right - left) // 2 + left) + 1, right)
-    result = merge(arr, left, (right - left) // 2, right)
     return result
 
 
-print(merge_sort([4, 5, 8, 1, 4, 9, 6, 2, 2, 9, 5], 2, 9))
-# print(merge([1, 3, 5, 7, 2, 4, 5, 7, 8], 1, 3, 8))
+def merge_sort(arr: list, left: int, right: int) -> None:
+    if right - left == 1 or right - left == 2:
+        arr[:] = merge(arr, left, (right - left) // 2 + left - 1, right - 1)
+        return None
+    mid = (right - left) // 2 + left
+    merge_sort(arr, left, mid)
+    left_part = arr
+    merge_sort(arr, mid, right)
+    right_part = arr
+    two_parts = left_part[:mid] + right_part[mid:]
+    arr[:] = merge(two_parts, left, mid - 1, right - 1)
+    return None
+
+
+arr = [4, 5, 8, 1, 4, 9, 6, 4, 7, 1, 5]
+print(arr)
+merge_sort(arr, 2, 9)
+print(arr)
