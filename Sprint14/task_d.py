@@ -1,12 +1,17 @@
 def feed_children(children, cookies):
     cookies.sort()
+    children.sort()
     result = 0
     for child in children:
-        for i, cook in enumerate(cookies):
+        flag = True
+        for cook in cookies:
             if cook >= child:
                 result += 1
-                cookies.pop(i)
+                cookies.remove[cook]
+                flag = False
                 break
+        if flag:
+            break
     print(result)
 
 
