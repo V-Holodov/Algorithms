@@ -31,12 +31,10 @@ def search_median(a, b, c, i):
 def qsort(arr):
     if len(arr) < 2:
         return arr
-    pivot = search_median(arr[0], arr[-1], arr[len(arr) // 2], 0)
+    pivot = search_median(arr[0], arr[-1], arr[len(arr) // 2], 1)
     left, right = partition(arr, pivot)
     return qsort(left) + qsort(right)
 
-
-# arr = [6, 7, 10]
 
 
 import random
@@ -51,7 +49,7 @@ def generate_random_string(length):
 
 # arr = [randint(0, 10) for i in range(5)]
 arr = []
-for i in range(4):
+for i in range(5):
     item = (generate_random_string(3), random.randint(0, 10), random.randint(0, 10))
     arr.append(item)
 print(arr)
@@ -61,4 +59,4 @@ for i in range(len(arr)):
 newarr = qsort(arr)
 print ('------')
 for i in range(len(newarr)):
-    print(arr[i])
+    print(newarr[i])
