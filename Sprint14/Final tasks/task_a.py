@@ -1,7 +1,7 @@
 # ID 49187387
 
 
-def binar_search(arr: list, k: int, left: int, right: int) -> int:
+def binar_search(arr: list[int], k: int, left: int, right: int) -> int:
     """Бинарный поиск частично осортированного массива."""
     mid = left + (right - left) // 2
     if not arr:

@@ -1,9 +1,35 @@
-# ID 49301677
+# ID 49324606
 
 
-def partition(arr, pivot):
-    left = 0
-    right = len(arr) - 1
+class Participant:
+    """
+    Сведения об участнике контеста.
+
+    Содержит имя - name, количество решенных задач - tasks
+    и размер штрафа - penalty.
+    При сравнении сначало учитывается количество решенных задач,
+    затем штраф, затем лексографически имя.
+    """
+
+    def __init__(self, name: str, tasks: int, penalty: int) -> None:
+        self.name = name
+        self.tasks = tasks
+        self.penalty = penalty
+        self.place = (-self.tasks, self.penalty, self.name)
+
+    def __lt__(self, other) -> bool:
+        return self.place < other.place
+
+    def __gt__(self, other) -> bool:
+        return self.place > other.place
+
+
+def qsort(arr: list[Participant], start: int, end: int) -> list:
+    if end - start < 1:
+        return arr
+    pivot = arr[end]
+    left = start
+    right = end
     while left <= right:
         while arr[left] < pivot:
             left += 1
@@ -13,41 +39,20 @@ def partition(arr, pivot):
             arr[left], arr[right] = arr[right], arr[left]
             left += 1
             right -= 1
-    return arr[:right + 1], arr[right + 1:]
+    qsort(arr, start, right)
+    qsort(arr, right + 1, end)
+    return arr
 
 
-def search_median(a, b, c):
-    s = [a] * 3
-    if a < b:
-        s[1] = b
-    else:
-        s[0] = b
-    if c >= s[1]:
-        s[2] = c
-    elif c >= s[0]:
-        s[2], s[1] = s[1], c
-    else:
-        s[2], s[1], s[0] = s[1], s[0], c
-    return s[1]
-
-
-def qsort(arr):
-    if len(arr) < 2:
-        return arr
-    pivot = search_median(arr[0], arr[-1], arr[len(arr) // 2])
-    left, right = partition(arr, pivot)
-    return qsort(left) + qsort(right)
-
-
-def main():
+def main() -> None:
     n = int(input())
     arr = []
     for _ in range(n):
-        item = input().split()
-        arr.append([-int(item[1]), int(item[2]), item[0]])
-    newarr = qsort(arr)
-    for i in range(len(newarr)):
-        print(newarr[i][2])
+        partic = input().split()
+        arr.append(Participant(partic[0], int(partic[1]), int(partic[2])))
+    qsort(arr, 0, len(arr) - 1)
+    for item in arr:
+        print(item.name)
 
 
 if __name__ == '__main__':
